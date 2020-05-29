@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace ChatApplication.ViewModel
 {
@@ -55,14 +56,36 @@ namespace ChatApplication.ViewModel
         }
 
         public CornerRadius WindowCornerRadius => new CornerRadius(WindowRadius);
-        #endregion
 
         /// <summary>
         /// The height of the title bar /caption of the window
         /// </summary>
         public int TitleHeight { get; set; } = 42;
 
-        public GridLength TitleHeightGridLength => new GridLength(TitleHeight);
+        public GridLength TitleHeightGridLength => new GridLength(TitleHeight + ResizeBorder);
+        #endregion
+
+        #region Command 
+        /// <summary>
+        /// The command to minimize the window
+        /// </summary>
+        public ICommand MinimizeCommand { get; set; }
+
+        /// <summary>
+        /// The command to maximize the window
+        /// </summary>
+        public ICommand MaximizeCommand { get; set; }
+
+        /// <summary>
+        /// The command to close the window
+        /// </summary>
+        public ICommand CloseCommand { get; set; }
+
+        /// <summary>
+        /// The command to show the system menu of the window
+        /// </summary>
+        public ICommand MenuCommand { get; set; }
+        #endregion
 
         #region Contructor
         public MainViewModel(Window window)
@@ -78,6 +101,14 @@ namespace ChatApplication.ViewModel
                 OnPropertyChanged(nameof(OuterMarginSizeThickness));
                 OnPropertyChanged(nameof(WindowRadius));
                 OnPropertyChanged(nameof(WindowCornerRadius));
+
+                // Create Commands
+
+                MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
+                MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
+                CloseCommand = new RelayCommand(() => mWindow.Close());
+                MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, window.PointToScreen(Mouse.GetPosition(window))));
+
 
             };
         }
