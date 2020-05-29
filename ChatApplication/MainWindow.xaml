@@ -9,7 +9,8 @@
         AllowsTransparency="True"
         Icon="Images/Logo/icon.ico"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <Label Content="sdfsf"/>
+
+    </StackPanel>
 </Window>

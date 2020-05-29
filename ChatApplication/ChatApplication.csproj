@@ -64,7 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -124,8 +124,8 @@
     <Resource Include="Fonts\Lato\Lato-Light.ttf" />
     <Resource Include="Fonts\Lato\Lato-LightItalic.ttf" />
     <Resource Include="Fonts\Lato\Lato-Regular.ttf" />
-    <Resource Include="Fonts\Lato\Lato-Thin.ttf" />
     <Resource Include="Fonts\Lato\Lato-ThinItalic.ttf" />
+    <Resource Include="Fonts\Lato\Lato-Thin.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
