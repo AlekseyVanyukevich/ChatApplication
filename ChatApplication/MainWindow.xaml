@@ -7,9 +7,52 @@
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
         Icon="Images/Logo/icon.ico"
-        Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
+        x:Name="AppWindow"
+        Title="MainWindow" Height="600" Width="900">
+    <Window.Resources>
+        <Style TargetType="{x:Type local:MainWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <!-- Out border with the dropshadow margin -->
+                        <Border Padding="{Binding OuterMarginSizeThickness, FallbackValue=10}" Background="Beige">
+                            <!--Main window outline-->
+                            <Grid Background="Red">
+                                <!-- Main border and dropshadow -->
+                                <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                        Background="{Binding ForegroundLightBrush, FallbackValue=white}">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2"/>
+                                    </Border.Effect>
+                                </Border>
+                                <!--The main window content-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <!--Titile bar-->
+                                        <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}"/>
+                                        <!--Drop shadow-->
+                                        <RowDefinition Height="Auto"/>
+                                        <!--Window Content-->
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="{Binding ResizeBorderThickness}" 
+                      CaptionHeight="{Binding TitleHeight}"
+                      CornerRadius="0"
+                      GlassFrameThickness="0"
+                      />
+    </WindowChrome.WindowChrome>
+    <StackPanel Background="Beige">
         <Label Content="sdfsf"/>
 
     </StackPanel>
