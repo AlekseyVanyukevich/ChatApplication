@@ -22,6 +22,15 @@ namespace ChatApplication.ViewModel
 
         #region Public Property
         /// <summary>
+        /// The window minimum width size
+        /// </summary>
+        public double WindowMinimumWidth { get; set; } = 400;
+
+        /// <summary>
+        /// The window minimum height
+        /// </summary>
+        public double WindowMinimumHeight { get; set; } = 400;
+        /// <summary>
         /// The size of the resize border around the window
         /// </summary>
         public int ResizeBorder { get; set; } = 6;
@@ -63,6 +72,10 @@ namespace ChatApplication.ViewModel
         public int TitleHeight { get; set; } = 42;
 
         public GridLength TitleHeightGridLength => new GridLength(TitleHeight + ResizeBorder);
+        /// <summary>
+        /// The paddig of the inner content of the main window
+        /// </summary>
+        public Thickness InnerContentPadding => new Thickness(ResizeBorder);
         #endregion
 
         #region Command 
@@ -101,16 +114,17 @@ namespace ChatApplication.ViewModel
                 OnPropertyChanged(nameof(OuterMarginSizeThickness));
                 OnPropertyChanged(nameof(WindowRadius));
                 OnPropertyChanged(nameof(WindowCornerRadius));
-
-                // Create Commands
-
-                MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
-                MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
-                CloseCommand = new RelayCommand(() => mWindow.Close());
-                MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, window.PointToScreen(Mouse.GetPosition(window))));
-
-
             };
+
+
+            // Create Commands
+
+            MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
+            MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
+            CloseCommand = new RelayCommand(() => mWindow.Close());
+            MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, window.PointToScreen(Mouse.GetPosition(window))));
+
+            var resizer = new WindowResizer(mWindow);
         }
         #endregion
     }
